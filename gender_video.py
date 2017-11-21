@@ -13,9 +13,9 @@ from utils.inference import load_detection_model
 from utils.preprocessor import preprocess_input
 
 
-detection_model_path = '../trained_models/detection_models/haarcascade_frontalface_default.xml'
-gender_model_path = '../trained_models/gender_models/CNN.81-0.96.hdf5'
-gender_labels = get_labels('imdb')
+detection_model_path = '../trained_models/haarcascade_frontalface_default.xml'
+gender_model_path = '../trained_models/CNN.hdf5'
+gender_labels = get_labels('imdb', 'Adience', 'imfdb')
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 frame_window = 10
