@@ -4,21 +4,24 @@ from utils.datasets import DataManager
 from models.cnn import cnn
 from utils.data_augmentation import ImageGenerator
 from utils.datasets import split_imdb_data
+from utils.datasets import split_Adience_data
+from utils.datasets import split_IMFDB_data
+
 
 # parameters
 batch_size = 32
-num_epochs = 1000
+num_epochs = 500
 validation_split = .2
 do_random_crop = False
 patience = 100
 num_classes = 2
-dataset_name = 'imdb'
+dataset_name = 'imdb', 'Adience', 'imfdb'
 input_shape = (64, 64, 1)
 if input_shape[2] == 1:
     grayscale = True
-images_path = '../datasets/imdb_crop/imdb_crop'
-log_file_path = '../trained_models/gender_models/gender_training.log'
-trained_models_path = '../trained_models/gender_models/gender_cnn'
+images_path = '../datasets/'
+log_file_path = '../trained_models/x.log'
+trained_models_path = '../trained_models/gender_cnn'
 
 # data loader
 data_loader = DataManager(dataset_name)
