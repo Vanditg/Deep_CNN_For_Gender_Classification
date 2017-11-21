@@ -16,12 +16,16 @@ class DataManager(object):
             self.dataset_path = dataset_path
         elif self.dataset_name == 'imdb':
             self.dataset_path = '../datasets/imdb_crop/imdb.mat'
+        elif self.dataset_name == 'Adience':
+            self.dataset_path = '../datasets/Aligned/aligned.txt'
         else:
             raise Exception('Incorrect dataset')
 
     def get_data(self):
         if self.dataset_name == 'imdb':
             ground_truth_data = self._load_imdb()
+        if self.dataset_name == 'Adience':
+            ground_truth_data = self._load_Adience()
         return ground_truth_data
 
     def _load_imdb(self):
@@ -48,10 +52,22 @@ class DataManager(object):
 def get_labels(dataset_name):
     if dataset_name == 'imdb':
         return {0:'woman', 1:'man'}
+    if dataset_name == 'Adience':
+        return {0:'woman', 1:'man'}    
     else:
         raise Exception('Invalid')
 
 def split_imdb_data(ground_truth_data, validation_split=.2, do_shuffle=False):
+    ground_truth_keys = sorted(ground_truth_data.keys())
+    if do_shuffle == True:
+        shuffle(ground_truth_keys)
+    training_split = 1 - validation_split
+    num_train = int(training_split * len(ground_truth_keys))
+    train_keys = ground_truth_keys[:num_train]
+    validation_keys = ground_truth_keys[num_train:]
+    return train_keys, validation_keys
+
+def split_Adience_data(ground_truth_data, validation_split=.2, do_shuffle=False):
     ground_truth_keys = sorted(ground_truth_data.keys())
     if do_shuffle == True:
         shuffle(ground_truth_keys)
